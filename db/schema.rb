@@ -15,9 +15,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_19_195455) do
   enable_extension "plpgsql"
 
   create_table "daily_readings", force: :cascade do |t|
-    t.datetime "reading_date", null: false
+    t.date "reading_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["reading_date"], name: "index_daily_readings_on_reading_date", unique: true
   end
 
 end
