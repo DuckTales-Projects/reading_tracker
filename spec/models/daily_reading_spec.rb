@@ -4,15 +4,39 @@ require 'rails_helper'
 
 RSpec.describe DailyReading, type: :model do
   describe '.validations' do
-    it { is_expected.to validate_presence_of(:reading_date) }
+    subject(:daily_reading_today) { create(:daily_reading) }
 
-    it '.ensure_the_read_date_has_a_unique_date' do
-      create(:daily_reading, reading_date: Time.zone.now)
-      invalid_date = build(:daily_reading, reading_date: 1.minute.from_now)
+    it { expect(daily_reading_today).to validate_presence_of(:reading_date) }
+    it { expect(daily_reading_today).to validate_uniqueness_of(:reading_date) }
 
-      expect(invalid_date).not_to be_valid
-      expect(invalid_date.errors.full_messages).to include('Reading date is not a valid date')
-      expect(invalid_date.errors.count).to eq 1
+    context 'when the reading_date is valid' do
+      let(:daily_reading_today) { create(:daily_reading, reading_date: Time.zone.yesterday) }
+      let(:new_reading_date) { create(:daily_reading, reading_date: Time.zone.today) }
+
+      before do
+        daily_reading_today
+        new_reading_date
+      end
+
+      it 'ensures the reading_date has a unique by date' do
+        expect(described_class.count).to eq 2
+      end
+    end
+
+    context 'when there is already a reading_date today' do
+      let(:daily_reading_today) { create(:daily_reading, reading_date: Time.zone.today) }
+      let(:invalid_date) { build(:daily_reading, reading_date: Time.zone.today) }
+
+      before do
+        daily_reading_today
+        invalid_date
+      end
+
+      it 'ensures the reading_date has a unique by date' do
+        expect(invalid_date).to be_invalid
+        expect(invalid_date.errors.count).to eq 1
+        expect(invalid_date.errors.messages[:reading_date]).to include('has already been taken')
+      end
     end
   end
 end
