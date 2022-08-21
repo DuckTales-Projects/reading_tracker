@@ -27,6 +27,7 @@
 # ignore coverage
 /coverage
 spec/examples.txt
+codecov
 
 # ignore byebug
 /.byebug_history
