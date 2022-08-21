@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
 require 'simplecov'
+require 'codecov'
 SimpleCov.start 'rails' do
   SimpleCov.minimum_coverage 100
+  SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
+    [
+      SimpleCov::Formatter::HTMLFormatter,
+      SimpleCov::Formatter::Codecov
+    ]
+  )
 end
 
 require 'spec_helper'
