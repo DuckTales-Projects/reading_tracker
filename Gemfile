@@ -16,6 +16,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 group :development, :test do
   gem 'brakeman'
   gem 'bundler-audit'
+  gem 'codecov'
   gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
