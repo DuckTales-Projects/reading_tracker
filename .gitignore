@@ -19,6 +19,7 @@
 
 # ignore the .env file
 .env
+.envrc
 
 # pid files
 /tmp/pids/*
