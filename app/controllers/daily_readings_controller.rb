@@ -2,15 +2,10 @@
 
 class DailyReadingsController < ApplicationController
   def create
-    return render status: :ok, body: t('read_confirmed') if DailyReading.last&.reading_date == Time.zone.today
+    return render status: :ok, body: t('read_confirmed') if DailyReading.last&.reading_date == Date.current
 
-    DailyReading.create!(daily_readings_params)
+    DailyReading.create!(reading_date: Date.current)
+
     render status: :created, body: t('read_confirmed')
-  end
-
-  private
-
-  def daily_readings_params
-    params.require(:daily_readings).permit(:reading_date)
   end
 end
