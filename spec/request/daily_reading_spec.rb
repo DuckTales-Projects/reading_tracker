@@ -46,9 +46,6 @@ describe 'DailyReading', type: :request do
       end
 
       it 'only the reading referring to the correct date must be confirmed' do
-        old_daily_reading = DailyReading.first.reading_date
-        last_daily_reading = DailyReading.last.reading_date.to_date
-
         expect(response).to have_http_status :ok
         expect(response.body).to eq 'Read successfully confirmed!'
         expect(DailyReading.count).to eq 2
