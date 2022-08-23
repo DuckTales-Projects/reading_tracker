@@ -36,6 +36,8 @@ describe 'DailyReading', type: :request do
 
       let(:create_daily_reading) { create(:daily_reading, reading_date: 2.days.ago.to_date) }
       let(:params) { { daily_readings: { reading_date: Date.yesterday } } }
+      let(:old_daily_reading) { DailyReading.first.reading_date }
+      let(:last_daily_reading) { DailyReading.last.reading_date.to_date }
 
       before do
         create_daily_reading
