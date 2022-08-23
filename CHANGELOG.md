@@ -7,6 +7,7 @@
 * Setup Code Scanning
 * Add DailyReading model
 * Add route to post daily reading
+* Setup the project for Rails API-only mode
 * Changelog
 
   *James, Jhonny, Marcelo*
