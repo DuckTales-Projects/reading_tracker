@@ -10,8 +10,8 @@ RSpec.describe DailyReading, type: :model do
     it { expect(daily_reading_today).to validate_uniqueness_of(:reading_date) }
 
     context 'when the reading_date is valid' do
-      let(:daily_reading_today) { create(:daily_reading, reading_date: Time.zone.yesterday) }
-      let(:new_reading_date) { create(:daily_reading, reading_date: Time.zone.today) }
+      let(:daily_reading_today) { create(:daily_reading, reading_date: Date.yesterday) }
+      let(:new_reading_date) { create(:daily_reading, reading_date: Date.current) }
 
       before do
         daily_reading_today
@@ -24,8 +24,8 @@ RSpec.describe DailyReading, type: :model do
     end
 
     context 'when there is already a reading_date today' do
-      let(:daily_reading_today) { create(:daily_reading, reading_date: Time.zone.today) }
-      let(:invalid_date) { build(:daily_reading, reading_date: Time.zone.today) }
+      let(:daily_reading_today) { create(:daily_reading, reading_date: Date.current) }
+      let(:invalid_date) { build(:daily_reading, reading_date: Date.current) }
 
       before do
         daily_reading_today

@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :daily_reading do
-    reading_date { Time.zone.today }
+    reading_date { Date.current }
   end
 end
