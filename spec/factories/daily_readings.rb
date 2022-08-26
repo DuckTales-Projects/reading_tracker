@@ -3,5 +3,6 @@
 FactoryBot.define do
   factory :daily_reading do
     reading_date { Date.current }
+    user
   end
 end
