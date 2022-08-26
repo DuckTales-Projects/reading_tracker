@@ -11,7 +11,7 @@ RSpec.describe DailyReading, type: :model do
 
     context 'when the reading_date is valid' do
       let(:daily_reading_today) { create(:daily_reading, reading_date: Date.yesterday) }
-      let(:new_reading_date) { create(:daily_reading, reading_date: Date.current) }
+      let(:new_reading_date) { create(:daily_reading, reading_date: Date.current, user_id: daily_reading_today.user_id) }
 
       before do
         daily_reading_today
