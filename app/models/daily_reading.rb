@@ -2,4 +2,6 @@
 
 class DailyReading < ApplicationRecord
   validates :reading_date, presence: true, uniqueness: true
+
+  belongs_to :user
 end
