@@ -4,7 +4,10 @@ require 'rails_helper'
 
 describe 'DailyReading', type: :request do
   describe 'POST /daily_readings' do
-    subject(:post_to_daily_readings) { post daily_readings_path }
+    subject(:post_to_daily_readings) { post daily_readings_path, params: params }
+
+    let(:user) { create(:user) }
+    let(:params) { { daily_readings: { user_id: user.id } } }
 
     context 'when the request is successful' do
       before { post_to_daily_readings }
@@ -17,7 +20,7 @@ describe 'DailyReading', type: :request do
     end
 
     context 'when receive a request more than once in a day' do
-      let(:create_daily_reading) { create(:daily_reading, reading_date: Date.current) }
+      let(:create_daily_reading) { create(:daily_reading, reading_date: Date.current, user_id: user.id) }
 
       before do
         create_daily_reading
@@ -32,16 +35,14 @@ describe 'DailyReading', type: :request do
     end
 
     context 'when the system receives a requisition with the incorrect date' do
-      subject(:post_to_daily_readings) { post daily_readings_path, params: params }
-
-      let(:create_daily_reading) { create(:daily_reading, reading_date: 2.days.ago.to_date) }
-      let(:params) { { daily_readings: { reading_date: Date.yesterday } } }
+      let(:create_daily_reading) { create(:daily_reading, reading_date: 2.days.ago.to_date, user_id: user.id) }
+      let(:params) { { daily_readings: { reading_date: Date.yesterday, user_id: user.id } } }
       let(:old_daily_reading) { DailyReading.first.reading_date }
       let(:last_daily_reading) { DailyReading.last.reading_date.to_date }
 
       before do
         create_daily_reading
-        post daily_readings_path
+        post daily_readings_path, params: { daily_readings: { user_id: user.id } }
         post_to_daily_readings
       end
 
