@@ -42,6 +42,7 @@ jobs:
       env:
         RAILS_ENV: test
         RUBYOPT: -W0
+        DEVISE_JWT_SECRET_KEY: ${{ secrets.DEVISE_JWT_SECRET_KEY }}
       run: |
         cp config/database.yml.github config/database.yml
         bundle exec rails db:reset db:setup db:migrate
@@ -57,4 +58,5 @@ jobs:
         RAILS_ENV: test
         RUBYOPT: -W0
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        DEVISE_JWT_SECRET_KEY: ${{ secrets.DEVISE_JWT_SECRET_KEY }}
       run: bundle exec rspec
