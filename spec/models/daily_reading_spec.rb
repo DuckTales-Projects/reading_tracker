@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe DailyReading, type: :model do
+RSpec.describe DailyReading do
   describe '.validations' do
     subject(:daily_reading_today) { create(:daily_reading) }
 
