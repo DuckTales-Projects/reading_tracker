@@ -9,9 +9,9 @@ gem 'bootsnap', require: false
 gem 'devise-jwt'
 gem 'pg'
 gem 'puma'
-gem 'rails', '~> 7.0.4'
+gem 'rails'
 
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'tzinfo-data'
 
 group :development, :test do
   gem 'brakeman'
