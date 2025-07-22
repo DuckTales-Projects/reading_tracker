@@ -54,12 +54,9 @@ jobs:
       run: bundle exec rubocop --config .rubocop.yml
 
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: ./coverage/*.json
-        flags: unittests
-        fail_ci_if_error: true
+      run: bash <(curl -s https://codecov.io/bash)
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
     - name: Run tests with RSpec
       env:
