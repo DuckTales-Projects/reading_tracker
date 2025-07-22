@@ -11,7 +11,7 @@ gem 'pg'
 gem 'puma'
 gem 'rails'
 
-gem 'tzinfo-data'
+gem 'tzinfo-data', platforms: [:mswin, :mingw, :x64_mingw]
 
 group :development, :test do
   gem 'brakeman'
